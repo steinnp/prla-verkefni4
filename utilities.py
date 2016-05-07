@@ -1,8 +1,13 @@
 from re import sub
-def replace(movie):
-    a = sub('[^\w]', ' ', movie)
-    a = sub('[_]', ' ', a)
-    return a[::-1].replace(' ','.',1)[::-1]
+def replace_files(movie):
+    clean = sub('[^\w]', ' ', movie)
+    clean = sub('[_]', ' ', clean)
+    return clean[::-1].replace(' ','.',1)[::-1]
+
+def replace_dirs(directory):
+    clean = sub('[^\w]', ' ', directory)
+    clean = sub('[_]', ' ', clean)
+    return clean
 
 def is_movie_file(movie):
     format1 = movie[-3:]
