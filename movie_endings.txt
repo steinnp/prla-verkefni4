@@ -1,0 +1,9 @@
+avi
+mp4
+asf
+mov
+flv
+swf
+mpg
+wmv
+divx
