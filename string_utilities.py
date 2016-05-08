@@ -1,5 +1,6 @@
 from re import sub
 def replace_files(movie):
+    movie = movie.strip()
     clean = sub('[^\w]', ' ', movie)
     clean = sub('[_]', ' ', clean)
     return clean[::-1].replace(' ','.',1)[::-1]
