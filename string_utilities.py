@@ -10,14 +10,13 @@ def replace_dirs(directory):
     return clean
 
 def is_movie_file(movie):
-    format1 = movie[-3:]
-    format2 = movie[-4:]
+    movie_type = movie[movie.rfind('.')+1:]
     endings = open('movie_endings.txt','r').read()
-    if (format1 in endings) or (format2 in endings):
+    if movie_type in endings:
         return True
     else:
         return False
 
-print(is_movie_file('test.avi'))
-print(is_movie_file('test.divx'))
-print(is_movie_file('test.dvx'))
+#print(is_movie_file('test.avi'))
+#print(is_movie_file('test.divx'))
+#print(is_movie_file('test.dvx'))
