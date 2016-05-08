@@ -18,18 +18,12 @@ elif folder_utils.detect_os() == 1:
 else:
     raise EnvironmentError('This script only works on Unix and Linux')
 
-    
-#print(FOLDER_SEPARATOR)
-    
-
 if args.new_path is None:
-    if folder_utils.detect_os() == 1:
-        args.new_path = args.directory_path + '/temp'
-        folder_utils.make_directory(args.new_path)
-#print(args)
+    args.new_path = args.directory_path + FOLDER_SEPARATOR + 'temp'
+    folder_utils.make_directory(args.new_path)
 
-files = folder_utils.list_files(args.directory_path)
-directories = folder_utils.list_directories(args.directory_path)
+movie_files = folder_utils.list_movies(args.directory_path, FOLDER_SEPARATOR)
+subtitle_files = folder_utils.list_movies(args.directory_path, FOLDER_SEPARATOR)
 
 def move_file_to_new(file_instance):
     return None

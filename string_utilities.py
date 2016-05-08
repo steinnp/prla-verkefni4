@@ -19,6 +19,13 @@ def is_movie_file(movie):
     else:
         return False
 
+def is_subtitle_file(filename):
+    subtitle_type = filename[filename.rfind('.')+1:]
+    endings = open('subtitle_endings.txt','r').read()
+    if subtitle_type in endings:
+        return True
+    else:
+        return False
 #print(is_movie_file('test.avi'))
 #print(is_movie_file('test.divx'))
 #print(is_movie_file('test.dvx'))

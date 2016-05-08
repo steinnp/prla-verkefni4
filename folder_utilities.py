@@ -1,4 +1,5 @@
-
+import string_utilities
+import glob
 from os import listdir
 from os import rename
 from os import path
@@ -10,8 +11,8 @@ def move_file(old,new):
 
 # makes a new directory at selected path
 def make_directory(newpath):
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
+    if not path.exists(newpath):
+        makedirs(newpath)
 
 # returns 0 for linux systems, 1 for unix and -1 for other operating systems
 def detect_os():
@@ -22,13 +23,25 @@ def detect_os():
     else:
         return -1
 
-# returns a list of all files in directory (requires full path)
-def list_files(directory):
-    return list(filter(path.isfile, listdir(directory)))
+# returns a list of all movie files in directory and subdirectories (requires full path)
+def list_movies(directory, separator):
+    a = []
+    for filename in glob.iglob(directory + separator + '**' + separator + '*', recursive=True):
+        if is_file(filename) and string_utilities.is_movie_file(filename):
+            a.append(filename)
+    return a
 
-# returns true if directory is a directory false otherwise
-def is_directory(directory):
-    return not path.isfile
+# returns a list of all subtitle files in directory and subdirectories (requires full path)
+def list_movies(directory, separator):
+    a = []
+    for filename in glob.iglob(directory + separator + '**' + separator + '*', recursive=True):
+        if is_file(filename) and string_utilities.is_subtitle_file(filename):
+            a.append(filename)
+    return a
+
+# returns true if the directory is a file
+def is_file(filename):
+    return path.isfile(filename)
 
 # returns a list of all files in directory (requires full path)
 def list_directories(directory):
