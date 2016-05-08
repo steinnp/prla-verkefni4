@@ -14,7 +14,7 @@ testReg = r"""^(?P<title>[-\w'"]+(?P<separator>[ .])(?:[-\w'"]+\2)*?)(?:(?:(?!\d
 
 
 def isolateSE(s):
-	s = strUtil.clean_file_name(s)
+	#s = strUtil.clean_file_name(s)
 	m = re.search(testReg, s, re.I|re.X|re.M)
 	if m is not None:
 		print("title: " + str(m.group('title')))
