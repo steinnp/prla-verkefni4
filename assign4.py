@@ -2,6 +2,7 @@ import argparse
 import identify
 import folder_utilities as folder_utils
 import file_class
+import search_utilities
 
 parser = argparse.ArgumentParser(description='Sort out messy movie folders')
 parser.add_argument('directory_path', metavar = 'o', type = str,
@@ -65,10 +66,26 @@ def move_known_movies(files, separator):
             i.set_new_name(i.get_name())
         new_files.append(i)
     known_movies = new_files
+
+def move_unknown_movies(files, separator):
+    unknown_dir = args.new_path + separator + 'unknown'
+    folder_utils.make_directory(unknown_dir)
+    for x in files:
+        for y in known_movies:
+            if search_utilities.substring_match(x,y.get_name()):
+                old_pos = y.get_old_file_position() 
+                new_pos = old_pos[:old_pos.rfind(separator)] + separator + x[x.rfind(separator) + 1:]
+                folder_utils.move_file(x, new_pos) 
+                x = ""
+        #folder_utils.move_file(x, unknown_dir + separator + x[x.rfind(separator) + 1:])
+
+    
+    
             
 
 fill_known_movies(movie_files, FOLDER_SEPARATOR)
 move_known_movies(known_movies, FOLDER_SEPARATOR)
+move_unknown_movies(unknown_movies, FOLDER_SEPARATOR)
 #for i in known_movies:
 #    print(i.get_name())
 print(len(unknown_movies))

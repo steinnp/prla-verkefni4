@@ -1,16 +1,20 @@
+import string_utilities
 
-# returns the longest matching substring in both strings if it exists
+# returns true if a substring of 2 words or more is in both strings
 def substring_match(a, b):
-    a = a[:min(len(a),len(b))]
-    b = b[:min(len(a),len(b))]
+    c = string_utilities.clean_file_name(a).split(' ')
+    d = string_utilities.clean_file_name(b).lower()
     if a == b:
         return a
-    while ' ' in a:
-        a = a.rsplit(' ', 1)[0]
-        b = b.rsplit(' ', 1)[0]
-        if a == b:
-            return a
-    return 0
+    substrings = []
+    for x in range(0,len(c)):
+        for y in range(x+2, len(c) + 1):
+            substrings.append(' '.join(c[x:y]))
+    for x in substrings:
+        if x.lower() in d:
+            return True
+
+    return False
 #print(substring_match('this is a test', 'this is bad test'))
 #print(substring_match('this a test', 'is bad test'))
 
