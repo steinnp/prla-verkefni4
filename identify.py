@@ -3,8 +3,8 @@ import string_utilities as strUtil
 import file_class
 
 
-romanReg = re.compile("(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})")
-fileSReg = re.compile("((s|S)\d{1,2}(e|E)\d{1,2}|\d{1,2}x\d{1,2})")
+
+romanTestReg = re.compile(r"""^(?P<title>[-\w'"]+(?P<separator>[ .])(?:[-\w'"]+\2)*?)(?:(?:(?:(?!\d+\2)(?:s(?:eason\2?)?)(?P<season>(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3}))(?:\s{0,4})(?:(?:e(?: pisode\2?)?))?(?P<episode>\d\d?)?(?:e\d\d?(?:-e?\d\d?)?\d\d?)?)))""",re.I|re.X|re.M)
 testReg = re.compile(r"""^(?P<title>[-\w'"]+(?P<separator>[ .])(?:[-\w'"]+\2)*?)(?:(?:(?!\d+\2)(?:s(?:eason\2?)?)?(?P<season>\d\d?)((?: e (?: pisode\2?)?)|x)?(?P<episode>\d\d?)?(?:e\d\d?(?:-e?\d\d?)?|x\d\d?)?|(?P<year>[(\]]?\d{4}[)\]]?)))""",re.I|re.X|re.M)
 
 
@@ -29,6 +29,8 @@ def isolateSE(s, separator):
             new_name = re.sub(' +',' ',name)
             print(new_name)
             m = testReg.search(new_name)
+            if m is None:
+                m = romanTestReg.search(new_name)
     if m is not None:
         a = file_class.File_info(s)
         if m.group('title') is not None:
