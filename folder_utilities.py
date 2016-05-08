@@ -13,7 +13,7 @@ def make_directory(newpath):
     if not os.path.exists(newpath):
         os.makedirs(newpath)
 
-# returns 0 for unix systems, 1 for windows and -1 for other operating systems
+# returns 0 for linux systems, 1 for unix and -1 for other operating systems
 def detect_os():
     if _platform == "linux" or _platform == "linux2" or _platform == "darwin":
         return 0

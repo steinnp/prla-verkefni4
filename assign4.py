@@ -9,6 +9,23 @@ parser.add_argument('new_path', metavar = 'n', type = str,
                          'path of the directory that needs sorting', nargs='?')
 
 args = parser.parse_args()
+
+FOLDER_SEPARATOR = ''
+if folder_utils.detect_os() == 0:
+    FOLDER_SEPARATOR = '/'
+elif folder_utils.detect_os() == 1:
+    FOLDER_SEPARATOR = r'\\'
+else:
+    raise EnvironmentError('This script only works on Unix and Linux')
+
+    
+#print(FOLDER_SEPARATOR)
+    
+
+if args.new_path is None:
+    if folder_utils.detect_os() == 1:
+        args.new_path = args.directory_path + '/temp'
+        folder_utils.make_directory(args.new_path)
 #print(args)
 
 files = folder_utils.list_files(args.directory_path)
