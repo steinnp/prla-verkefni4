@@ -32,7 +32,7 @@ def list_movies(directory, separator):
     return a
 
 # returns a list of all subtitle files in directory and subdirectories (requires full path)
-def list_movies(directory, separator):
+def list_subtitles(directory, separator):
     a = []
     for filename in glob.iglob(directory + separator + '**' + separator + '*', recursive=True):
         if is_file(filename) and string_utilities.is_subtitle_file(filename):
