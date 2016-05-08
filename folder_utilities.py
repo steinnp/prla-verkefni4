@@ -5,9 +5,10 @@ from os import rename
 from os import path
 from os import makedirs
 from sys import platform as _platform
+
 # moves old to new (does the same as the mv command)
 def move_file(old,new):
-    os.rename(old,new)
+    rename(old,new)
 
 # makes a new directory at selected path
 def make_directory(newpath):
@@ -27,7 +28,7 @@ def detect_os():
 def list_movies(directory, separator):
     a = []
     for filename in glob.iglob(directory + separator + '**' + separator + '*', recursive=True):
-        if is_file(filename) and string_utilities.is_movie_file(filename):
+        if is_file(filename) and string_utilities.is_movie_file(filename) and 'sample' not in filename:
             a.append(filename)
     return a
 

@@ -21,6 +21,14 @@ def isolateSE(s, separator):
     name = strUtil.clean_file_name(name)
     name = re.sub(' +',' ',name)
     m = testReg.search(name)
+    if m is None:
+        new_name = ' '.join(s.split(separator)[-3:])
+        match = re.search('season|Season|S[0-9]{1,2}E', new_name)
+        if match is not None:
+            new_name = strUtil.clean_file_name(new_name)
+            new_name = re.sub(' +',' ',name)
+            print(new_name)
+            m = testReg.search(new_name)
     if m is not None:
         a = file_class.File_info(s)
         if m.group('title') is not None:
@@ -29,6 +37,7 @@ def isolateSE(s, separator):
             a.set_season(str(m.group('season')))
         if m.group('episode') is not None:
             a.set_episode(str(m.group('episode')))
+        a.set_extension(s[s.rfind('.')+1:])
         return a
             #print("title: " + str(m.group('title')))
             #print("season: " + str(m.group('season')))
